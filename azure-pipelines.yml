@@ -1,4 +1,8 @@
 # .NET Desktop
+- task: AzureAppServiceManage@0
+  inputs:
+    Action: 'Swap Slots'
+    WebAppName: 
 # Build and run tests for .NET Desktop or Windows classic desktop solutions.
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/apps/windows/dot-net
@@ -8,6 +12,13 @@ trigger:
 
 pool:
   vmImage: 'windows-latest'
+- task: Ant@1
+  inputs:
+    buildFile: 'build.xml'
+    options: 
+    publishJUnitResults: true
+    testResultsFiles: '**/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
 
 variables:
   solution: '**/*.sln'
